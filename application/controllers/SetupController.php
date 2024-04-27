@@ -13,7 +13,7 @@ class SetupController extends CI_Controller
         #ข้อมูลตั้งต้น และข้อมูลโรงเรียน
         $this->create_school_type();
         $this->create_school_class();
-        $this->create_education_plan();
+       $this->create_education_plan();
         $this->create_school();
         echo "<p style='color:green;'>Setup School Success</p>";
 
@@ -75,7 +75,7 @@ class SetupController extends CI_Controller
                 'education_type' => 'ordinary',
                 'type' => 'ปฐมวัย',
                 'name' => 'เตรียมอนุบาล',
-                'abbreviation' => 'ตอ.',
+                'abbreviation' => 'ตอ',
                 'level' => '0',
                 'sequence' => '0'
             ),
@@ -312,11 +312,53 @@ class SetupController extends CI_Controller
         $data = array(
             array(
                 'name' => 'ทั่วไป',
-                'name_eng' => 'general'
+                'name_th' => ' ',
+                'name_eng' => ' '
             ),
             array(
-                'name' => 'วิทย์คณิต',
+                'name' => 'MEP',
+                 'name_th' => 'ห้องเรียน MEP',
                 'name_eng' => 'MEP'
+            ),
+             array(
+                'name' => 'วิทย์-คณิต',
+                 'name_th' => 'ห้องเรียน วิทย์-คณิต',
+                'name_eng' => 'Sci-Math'
+            ),
+            array(
+                'name' => 'PMP',
+                 'name_th' => 'ห้องเรียน PMP',
+                'name_eng' => 'PMP'
+            ),
+            array(
+                'name' => 'SME',
+                 'name_th' => 'ห้องเรียน SME',
+                'name_eng' => 'SME'
+            ),
+            array(
+                'name' => 'เทคโนโลยีดิจิทัล',
+                 'name_th' => 'ห้องเรียน เทคโนโลยีดิจิทัล',
+                'name_eng' => 'Technology'
+            ),
+            array(
+                'name' => 'การตลาด',
+                 'name_th' => 'ห้องเรียน การตลาด',
+                'name_eng' => 'Marketing'
+            ),
+            array(
+                'name' => 'บัญชี',
+                 'name_th' => 'ห้องเรียน บัญชี',
+                'name_eng' => 'Accounting'
+            ),
+            array(
+                'name' => 'ไฟฟ้ากำลัง',
+                 'name_th' => 'ห้องเรียน ไฟฟ้ากำลังต',
+                'name_eng' => 'Electical'
+            ),
+            array(
+                'name' => 'เทคนิคยานยนต์',
+                 'name_th' => 'ห้องเรียน เทคนิคยานยนต์',
+                'name_eng' => 'Mechanical'
             ),
         );
         $this->db->insert_batch('tb_education_plan', $data);
@@ -326,7 +368,7 @@ class SetupController extends CI_Controller
     {
         $array = array(
             'school_type_id' => 1,
-            'name' => 'โรงเรียนเอแคดศึกษา',
+            'name' => 'โรงเรียนเทศบาลท่าโขลง ๑',
             'maximum_semester' => 2
         );
 
@@ -337,10 +379,10 @@ class SetupController extends CI_Controller
     function create_user_admin()
     {
         $array = array(
-            'username' => 'acad',
+            'username' => 'admin',
             'type' => 'admin',
             'email' => 'acad@email.com',
-            'password' => password_hash("password", PASSWORD_DEFAULT),
+            'password' => password_hash("acad@pnw2024", PASSWORD_DEFAULT),
             'remember_token' => 'acad_token',
             'created_at' => strtotime(date('Y-m-d h:i:s')),
             'updated_at' => strtotime(date('Y-m-d h:i:s'))

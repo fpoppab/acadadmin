@@ -142,6 +142,25 @@ class SchoolController extends CI_Controller
         $this->load->view("rooms/roomsInsertForm", $data);
         $this->load->view("layout/footer");
     }
+    
+    public function roomEditList($id) {
+        $this->load->model("StudentModel");
+        $mem = $this->SchoolModel->get_room_member($id);
+        $list = array();
+        if(!empty($mem)){
+            $i = 0;
+            foreach($mem as $m){
+                $student = $this->StudentModel->get_student_by_stdid($m['student_id']);
+                $list[$i] = $student;
+                $i++;
+            }
+        }
+        $data["room"] = $this->SchoolModel->get_room_detail_by_id($id);
+         $data["studentList"] = $list; 
+        $this->load->view("layout/header");
+        $this->load->view("rooms/roomsIndexMember", $data);
+        $this->load->view("layout/footer");
+    }
 
     public function update_room()
     {

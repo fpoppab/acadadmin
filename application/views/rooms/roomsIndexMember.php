@@ -8,7 +8,14 @@
                     School
                 </div>
                 <h2 class="page-title">
-                    Room and Homeroom
+                    <a class='text-blue' href="<?php echo site_url("room"); ?>">Room and Homeroom</a> | 
+                    <?php
+                    if (!empty($room)) {
+                        echo " <i class='ti ti-clipboard'></i> " . $room["clss_room"];
+                    } else {
+                        echo "-";
+                    }
+                    ?>
                 </h2>
 
 
@@ -16,17 +23,19 @@
             <!-- Page title actions -->
             <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
-                    <!-- <span class="d-none d-sm-inline">
-                        <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modal-report">
-                            Modal with form
-                        </a>
-                    </span> -->
-                    <a href="<?php echo site_url("room-insert-form"); ?>"
-                       class="btn btn-primary d-none d-sm-inline-block">
-                        <i class='ti ti-plus'></i>Create new room
+                    <a href="#"
+                       class="btn btn-primary d-none d-sm-inline-block"data-bs-toggle="modal" data-bs-target="#room-member-import-modal">
+                        <i class='ti ti-upload'></i>Upload Student
                     </a>
-                    <a href="<?php echo site_url("room-insert-form"); ?>" class="btn btn-primary d-sm-none btn-icon">
-                        <i class='ti ti-plus'></i>
+                    <a href="<?php echo site_url("student-insert-form"); ?>"
+                       class="btn btn-primary d-none d-sm-inline-block">
+                        <i class='ti ti-plus'></i>Insert Student
+                    </a>
+                    <a href="#" class="btn btn-primary d-sm-none btn-icon"data-bs-toggle="modal" data-bs-target="#room-member-import-modal">
+                        <i class='ti ti-upload'></i> 
+                    </a>
+                    <a href="<?php echo site_url("student-insert-form"); ?>" class="btn btn-primary d-sm-none btn-icon">
+                        <i class='ti ti-plus'></i> 
                     </a>
                 </div>
             </div>
@@ -51,35 +60,31 @@
                             </thead>
                             <tbody>
                                 <?php
-                                if (!empty($room)) {
+                                if (!empty($studentList)) {
                                     $i = 1;
 
-                                    foreach ($room as $r) {
+                                    foreach ($studentList as $r) {
                                         ?>
                                         <tr>
                                             <td> <?php echo $i ?></td>
-                                            <td><?php echo $r["clss_room"] ?> </td>
+                                            <td><?php echo $r["fullname"] ?> </td>
                                             <td class='text-center '>
                                                 <button class="btn btn-edit d-none d-sm-inline-block"
-                                                        id="<?= $r["room_id"] ?>">
+                                                        id="<?= $r["std_id"] ?>">
                                                     <i class='ti ti-edit'></i>Edit
                                                 </button>
                                                 <button class="btn btn-delete d-none d-sm-inline-block"
-                                                         id="<?= $r["room_id"] ?>">
+                                                        id="<?= $r["std_id"] ?>">
                                                     <i class='ti ti-trash'></i>Delete
-                                                 </button>
-                                                <button class="btn btn-student d-none d-sm-inline-block"
-                                                         id="<?= $r["room_id"] ?>">
-                                                    <i class='ti ti-users-group'></i>Student
-                                                 </button>
-                                        </td>
+                                                </button>
+                                            </td>
                                         </tr>
                                         <?php
                                         $i++;
                                     }
                                 }
                                 ?>
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -87,7 +92,7 @@
         </div>
     </div>
 </div>
-
+<?php $this->load->view("rooms/modal/room_member_import_modal"); ?>
 <script>
     $('#roomTable').DataTable({
         responsive: {
@@ -104,8 +109,8 @@
     $(".btn-edit").on("click", function () {
         location.href = "<?php echo site_url("room-edit-form/"); ?>" + $(this).attr('id');
     });
-    
-        $(".btn-student").on("click", function () {
+
+    $(".btn-student").on("click", function () {
         location.href = "<?php echo site_url("room-edit-list/"); ?>" + $(this).attr('id');
     });
 

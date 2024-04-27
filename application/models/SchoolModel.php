@@ -210,6 +210,23 @@ class SchoolModel extends CI_Model
             return "missing parameter";
         }
     }
+    
+     public function get_room_detail_by_id($id)
+    {
+        $this->db->select('*,a.id as school_clss_id,b.id as clss_id,c.id as room_id');
+        $this->db->select('c.number as room_number');
+        $this->db->select('CONCAT(a.name, "ปีที่ ", a.level) AS clss_name');
+        $this->db->select('CONCAT(a.name, "ปีที่ ", a.level,"/",c.number) AS clss_room');
+        $this->db->select('CONCAT(a.abbreviation, ".", a.level,"/",c.number) AS clss_room_ab');
+        $this->db->from('tb_school_class a');
+        $this->db->join('tb_school_class_register b', 'b.school_class_id = a.id');
+        $this->db->join('tb_room c', 'c.school_class_register_id = b.id');
+        $this->db->where("c.id", $id);
+        $this->db->order_by('a.sequence ASC');
+        $this->db->order_by('c.number ASC');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 
     public function update_room($data, $room_id = null, $personnel)
     {
@@ -256,6 +273,20 @@ class SchoolModel extends CI_Model
     public function get_education_plan()
     {
         $this->db->select('name as ed_plan_name,id as ed_plan_id')->from('tb_education_plan');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    
+    #ดึงข้อมูลนักเรียนภายในห้อง
+    public function get_room_member($room_id = null)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_room_members a');
+        if(!empty($room_id)){
+            $this->db->where(array('room_id'=>$room_id));
+        }
+        $this->db->order_by('number ASC');
+               
         $query = $this->db->get();
         return $query->result_array();
     }

@@ -1,6 +1,6 @@
 <?php
-function get_client_ip()
-{
+
+function get_client_ip() {
     $ipaddress = '';
     if (getenv('HTTP_CLIENT_IP'))
         $ipaddress = getenv('HTTP_CLIENT_IP');
@@ -18,31 +18,27 @@ function get_client_ip()
         $ipaddress = 'UNKNOWN';
     return $ipaddress;
 }
-function todate($epoch)
-{
+
+function todate($epoch) {
     return date("Y-m-d", $epoch);
 }
 
-function tothaidate($epoch)
-{
+function tothaidate($epoch) {
     $newEpochTime = strtotime("+543 years", $epoch);
     return date("j/n/", $epoch) . date("Y", $newEpochTime);
 }
 
-function tothaishortdate($epoch)
-{
+function tothaishortdate($epoch) {
     $newEpochTime = strtotime("+543 years", $epoch);
     return date("j ") . tothaishortmonth(date("n", $epoch)) . date(" y", $newEpochTime);
 }
 
-function tothaifulldate($epoch)
-{
+function tothaifulldate($epoch) {
     $newEpochTime = strtotime("+543 years", $epoch);
     return date("j ") . tothaifullmonth(date("n", $epoch)) . date(" Y", $newEpochTime);
 }
 
-function tothaifullmonth($num)
-{
+function tothaifullmonth($num) {
     if ($num >= 1 && $num <= 12) {
         $thaiMonth = array(
             1 => "มกราคม",
@@ -62,8 +58,7 @@ function tothaifullmonth($num)
     }
 }
 
-function tothaishortmonth($num)
-{
+function tothaishortmonth($num) {
     if ($num >= 1 && $num <= 12) {
         $thaiMonth = array(
             1 => "ม.ค.",
@@ -81,4 +76,20 @@ function tothaishortmonth($num)
         );
         return $thaiMonth[$num];
     }
+}
+
+function thaimoth_to_month_db($month) {
+    $thaimonth = array("ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
+    return str_replace(array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'), $thaimonth, $month);
+}
+
+function insert_zero_f_position($number, $pos) {
+
+    $cnt = strlen($number);
+    $str = $number;
+    for ($i = 0; $i < ($pos - $cnt); $i++) {
+        $str = "0" . $str;
+    }
+
+    return $str;
 }

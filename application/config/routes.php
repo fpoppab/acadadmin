@@ -78,10 +78,12 @@ $route['school'] = 'SchoolController/schoolIndex';
 $route['room']='SchoolController/roomIndex';
 $route['room-insert-form']='SchoolController/roomInsertForm';
 $route['room-edit-form/(:num)']='SchoolController/roomEditForm/$1';
+$route['room-edit-list/(:num)']='SchoolController/roomEditList/$1';
 
 $route['student-promote']='StudentController/studentPromoteIndex';
 $route['student-report']='StudentController/studentReportIndex';
 $route['student-report-pp2/(:num)']='StudentController/studentPP2Report/$1';
+$route['student-import']='StudentController/inportStudent';
 
 
 

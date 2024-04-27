@@ -29,6 +29,7 @@ class AuthenticationController extends CI_Controller
 				$this->session->set_userdata('userLanguage', 'en');
 				$this->session->set_userdata('userId', $row['id']);
 				$this->session->set_userdata('userStatus', 1);
+                              
 				#ผูกข้อมูลกับ session
 				$this->UserModel->insert_user_session(array('session_id' => $this->session->session_id));
 				#ลงข้อมูลว่าเข้าระบบสำเร็จ
