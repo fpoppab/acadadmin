@@ -17,6 +17,7 @@ class SetupController extends CI_Controller {
         $this->create_school();
         echo "<p style='color:green;'>Setup School Success</p>";
 
+        
         #ข้อมูลที่ใช้ตั้งค่าให้ user   
         $this->create_user_admin();
         echo "<p style='color:green;'>Setup User success</p>";
