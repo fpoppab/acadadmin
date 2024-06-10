@@ -57,6 +57,7 @@ $route['auth/login'] = 'AuthenticationController/login';
 $route['auth/logout'] = 'AuthenticationController/logout';
 
 $route['setupData'] = 'SetupController/index';
+$route['linkUser'] = 'SetupController/create_link_user_personnel';
 $route['set_theme/(:any)'] = 'Welcome/set_theme/$1';
 
 $route['activity'] = 'ProfileController/activityIndex';
