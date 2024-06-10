@@ -7,4 +7,9 @@ class TestBookFirstController extends CI_Controller
     public function test_method (){
 
     }
+
+    public function testfirst_method (){
+        echo "1234";
+
+    }
 }
