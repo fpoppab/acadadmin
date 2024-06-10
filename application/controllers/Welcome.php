@@ -29,6 +29,7 @@ class Welcome extends CI_Controller
 	{
 		$edyear = $this->input->post('Edyear');
 		$this->session->set_userdata('userEdyear', $edyear);
+		
 	}
 
 	public function set_semester()
