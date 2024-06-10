@@ -92,4 +92,5 @@ $route['subject-teacher']='SchoolController/subjectTeacherIndex';
 
 $route['syllabus']='CourseConroller/syllaBusIndex';
 $route['course']='CourseConroller/courseIndex';
+$route['course-insert-form']='CourseConroller/courseInsertForm';
 $route['course-register']='CourseConroller/courseRegisterIndex';
