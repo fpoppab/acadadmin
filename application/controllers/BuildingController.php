@@ -9,12 +9,21 @@ class BuildingController extends CI_Controller
         if (empty($this->session->userdata("userStatus"))) {
             redirect(site_url(), 'refresh');
         }
-
     }
+
     public function buildingIndex()
     {
+
         $this->load->view("layout/header");
         $this->load->view("building/buildingIndex");
+        $this->load->view("layout/footer");
+    }
+
+    public function buildingInsertForm()
+    {
+
+        $this->load->view("layout/header");
+        $this->load->view("building/buildingInsertForm");
         $this->load->view("layout/footer");
     }
 }

@@ -64,6 +64,8 @@ $route['activity'] = 'ProfileController/activityIndex';
 $route['profile'] = 'ProfileController/profileIndex';
 
 $route['building']='BuildingController/buildingIndex';
+$route['building-insert-form']='BuildingController/buildingInsertForm';
+
 $route['users'] = 'UserController/usersIndex';
 $route['user-insert-form']='UserController/userInsertForm';
 
