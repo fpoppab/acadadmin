@@ -56,7 +56,9 @@ $route['translate_uri_dashes'] = FALSE;
 $route['auth/login'] = 'AuthenticationController/login';
 $route['auth/logout'] = 'AuthenticationController/logout';
 
-$route['setupData'] = 'SetupController/index';
+$route['setupData'] = 'SetupController/setupdata';
+$route['mockupData'] = 'SetupController/mockupdata';
+
 $route['linkUser'] = 'SetupController/create_link_user_personnel';
 $route['set_theme/(:any)'] = 'Welcome/set_theme/$1';
 
