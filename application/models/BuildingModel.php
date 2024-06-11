@@ -4,7 +4,8 @@ class BuildingModel extends CI_Model
 
     public function building_pattern()
     {
-        $this->db->select('a.*,a.id as building_id');
+        $this->db->select('a.school_id ,a.building_type_id  ,a.id as building_id,a.name as building_name,a.status as building_status,a.descriptions as building_descriptions,a.purchase_year as building_purchase_year');
+        $this->db->select('a.created_at as building_created_at,a.updated_at as building_updated_at');
         $this->db->select('b.id as building_type_id,b.name as building_type_name');
         $this->db->from('tb_building a');
         $this->db->join('tb_building_type b', 'b.id = a.building_type_id');
