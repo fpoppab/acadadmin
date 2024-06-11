@@ -92,7 +92,7 @@ class BuildingModel extends CI_Model
     {
         if (!empty($building_id)) {
             $this->db->trans_begin();
-            $this->db->where('a.id', $building_id);
+            $this->db->where('id', $building_id);
             $this->db->delete('tb_building');
 
             if ($this->db->trans_status() === FALSE) {
