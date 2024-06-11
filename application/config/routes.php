@@ -95,8 +95,8 @@ $route['student-import']='StudentController/inportStudent';
 
 $route['subject-teacher']='SchoolController/subjectTeacherIndex';
 
-$route['syllabus']='CourseConroller/syllaBusIndex';
-$route['course']='CourseConroller/courseIndex';
-$route['course-insert-form']='CourseConroller/courseInsertForm';
+$route['syllabus']='CourseController/syllaBusIndex';
+$route['course']='CourseController/courseIndex';
+$route['course-insert-form']='CourseController/courseInsertForm';
 $route['course-edit-form/(:num)']='CourseController/courseEditForm/$1';
-$route['course-register']='CourseConroller/courseRegisterIndex';
+$route['course-register']='CourseController/courseRegisterIndex';
