@@ -31,7 +31,7 @@ class BuildingModel extends CI_Model
     public function get_building_by_id($building_id)
     {
         if (!empty($building_id)) {
-            $this->personel_pattern();
+            $this->building_pattern();
             $this->db->where(array('a.id' => $building_id));
             $query = $this->db->get();
             return $query->row_array();
