@@ -4,7 +4,7 @@ class CourseModel extends CI_Model
 
     public function course_pattern()
     {
-        $this->db->select('a.*');
+        $this->db->select('a.*,a.id as course_id');
         $this->db->from('tb_course a');
         $this->db->join('tb_school_class_register b', 'b.id = a.school_class_register_id');
         $this->db->join('tb_school_class c', 'c.id = b.school_class_id');
