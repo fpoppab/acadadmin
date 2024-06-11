@@ -38,34 +38,51 @@
                     <thead>
                         <tr>
                             <th class="w-1">No.</th>
-                            <th style="width:5%;">Image</th>
-                            <th style="width:17%;">Fullname</th>
-                            <th style="width:5%;">Nickname</th>
-                            <th style="width:5%;">Idcard</th>
-                            <th style="width:5%;">Birthdate</th>
-                            <th style="width:5%;">Gender</th>
-                            <th style="width:5%;">Bloodtype</th>
+                            <th style="width:7%;">กลุ่มสาระ</th>
+                            <th style="width:7%;">ระดับชั้น</th>
+                            <th style="width:7%;">รหัสวิชา</th>
+                            <th style="width:7%;">ชื่อวิชา</th>
+                            <th style="width:7%;">ประเภท</th>
+                            <th style="width:7%;">ชั่วโมงเรียนต่อสัปดาห์</th>
+                            <th style="width:7%;">Bloodtype</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i = 1;
+                        foreach ($course as $c) { ?>
                             <tr>
-                                <td>5</td>
-                                <td>5</td>
-                                <td>5</td>
-                                <td>5</td>
-                                <td>5</td>
-                                <td>5</td>
-                                <td>5</td>
+                                <td>
+                                    <?php echo $i ?>
+                                </td>
+                                <td>
+                                    <?php echo $c["group_learning_name"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $c["clss_name"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $c["course_code"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $c["course_name"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $c["course_type"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $c["course_hours"] ?>
+                                </td>
                                 <td class='text-center'>
-                                    <button class="btn btn-edit d-none d-sm-inline-block" id="">
+                                    <button class="btn btn-edit d-none d-sm-inline-block" id="<?php echo $c["course_id"] ?>">
                                         <i class='ti ti-edit'></i>Edit
                                     </button>
-                                    <buttona class="btn btn-delete d-none d-sm-inline-block" id="">
+                                    <buttona class="btn btn-delete d-none d-sm-inline-block" id="<?php echo $c["course_id"] ?>">
                                         <i class='ti ti-trash'></i>Delete
                                         </button>
                                 </td>
                             </tr>
-                            
+                            <?php $i++;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -103,7 +120,7 @@
                 type: "POST",
                 url: "<?php echo site_url("CourseController/delete_course") ?>",
                 data: {
-                    inPer: $(this).attr('id')
+                    inCourseId: $(this).attr('id')
                 },
             }).done(function (data) {
                
