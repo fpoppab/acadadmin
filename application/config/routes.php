@@ -67,6 +67,7 @@ $route['profile'] = 'ProfileController/profileIndex';
 
 $route['building']='BuildingController/buildingIndex';
 $route['building-insert-form']='BuildingController/buildingInsertForm';
+$route['building-edit-form/(:num)']='BuildingController/buildingEditForm/$1';
 
 $route['users'] = 'UserController/usersIndex';
 $route['user-insert-form']='UserController/userInsertForm';
@@ -97,4 +98,5 @@ $route['subject-teacher']='SchoolController/subjectTeacherIndex';
 $route['syllabus']='CourseConroller/syllaBusIndex';
 $route['course']='CourseConroller/courseIndex';
 $route['course-insert-form']='CourseConroller/courseInsertForm';
+$route['course-edit-list/(:num)']='CourseController/courseEditList/$1';
 $route['course-register']='CourseConroller/courseRegisterIndex';
