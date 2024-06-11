@@ -9,21 +9,70 @@ class BuildingController extends CI_Controller
         if (empty($this->session->userdata("userStatus"))) {
             redirect(site_url(), 'refresh');
         }
+        $this->load->model('BuildingModel');
     }
 
     public function buildingIndex()
     {
-
+        $data["building"]=$this->BuildingModel->get_building($this->session->userdata("userSchoolId"));
         $this->load->view("layout/header");
-        $this->load->view("building/buildingIndex");
+        $this->load->view("building/buildingIndex",$data);
         $this->load->view("layout/footer");
     }
 
     public function buildingInsertForm()
     {
-
+        $data["building_type"]=$this->BuildingModel->get_building_type();
         $this->load->view("layout/header");
-        $this->load->view("building/buildingInsertForm");
+        $this->load->view("building/buildingInsertForm",$data);
         $this->load->view("layout/footer");
+    }
+
+    public function buildingEditForm($building_id)
+    {
+        $data["row"] = $this->BuildingModel->get_building_by_id($building_id);
+        $data["building_type"] = $this->BuildingModel->get_building_type();
+        $this->load->view("layout/header");
+        $this->load->view("building/buildingInsertForm", $data);
+        $this->load->view("layout/footer");
+    }
+
+    public function insert_building()
+    {
+        $arr = array(
+            "school_id" => $this->session->userdata("userSchoolId"),
+            "building_type_id" => $this->input->post("inType"),
+            "name" => $this->input->post("inName"),
+            "descriptions" => $this->input->post("inDetail"),
+            "purchase_year" => $this->input->post("inReceive"),
+            "status" => $this->input->post("inStatus")
+            
+        );
+        echo $this->BuildingModel->update_building($arr);
+    }
+
+    public function update_building()
+    {
+        $arr = array(
+            "id" => $this->input->post("inBld"),
+            "school_id" => $this->session->userdata("userSchoolId"),
+            "building_type_id" => $this->input->post("inType"),
+            "name" => $this->input->post("inName"),
+            "descriptions" => $this->input->post("inDetail"),
+            "purchase_year" => $this->input->post("inReceive"),
+            "status" => $this->input->post("inStatus")
+            
+        );
+        echo $this->BuildingModel->update_building($arr, $this->input->post("inBld"));
+    }
+
+    public function delete_building()
+    {
+        $bld_id = $this->input->post("inBld");
+
+        $status = $this->BuildingModel->delete_building($bld_id);
+        if ($status == "success") {
+            echo "ลบข้อมูลสำเร็จ !";
+        }
     }
 }

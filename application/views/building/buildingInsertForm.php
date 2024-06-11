@@ -19,81 +19,46 @@
             <div class="row g-0">
                 <div class="col d-flex flex-column">
                     <form id="insert-form" method="post" autocomplete="off" enctype="multipart/form-data">
-                        <input type="hidden" id="inPer" name="inPer" value="<?php echo (!empty($this->uri->segment(2))) ? $this->uri->segment(2) : ""; ?>" />
+                        <input type="hidden" id="inBld" name="inBld" value="<?php echo (!empty($this->uri->segment(2))) ? $this->uri->segment(2) : ""; ?>" />
 
                         <div class="card-body">
                             <h2 class="mb-4">Building</h2>
                             <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("Type"); ?>
-                                    <select class="form-select tomselected " id="inTitleName" name="inTitleName">
+                                    <select class="form-select tomselected " id="inType" name="inType" required>
                                         <option value="">เลือกข้อมูล</option>
-                                        <?php $title = array( "ห้องเรียน", "ห้องสมุด", "ห้องคอมพิวเตอร์" , "ห้องปฏิบัติการทางภาษา", "ห้องปฐมพยาบาล", "ห้องจริยศึกษา", "ห้องแนะแนว", "ห้องร้านค้าสหกรณ์", "ห้องประชุม"); ?>
-                                        <?php foreach ($title as $t) { ?>
-                                            <?php $sel = (!empty($row["titlename"]) && $row["titlename"] == $t) ? "selected" : ""; ?>
-                                            <option value="<?php echo $t ?>" <?php echo $sel ?>><?php echo $t ?></option>
+                                        <?php foreach ($building_type as $t) { ?>
+                                            <?php $sel = (!empty($row["building_type_id"]) && $row["building_type_id"] == $t["building_type_id"]) ? "selected" : ""; ?>
+                                            <option value="<?php echo $t["building_type_id"] ?>" <?php echo $sel ?>><?php echo $t["building_type_name"] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-md">
+                                    <?php _label("Name"); ?>
+                                    <input type="text" class="form-control " id="inName" name="inName" value="<?php echo (!empty($row["building_name"])) ? $row["building_name"] : ""; ?>" required />
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md">
                                     <?php _label("Detail"); ?>
-                                    <input type="text" class="form-control " id="inFirstName" name="inFirstName" value="<?php echo (!empty($row["firstname"])) ? $row["firstname"] : ""; ?>" required />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("maximum student capacity"); ?>
-                                    <input type="number" class="form-control" id="innumber" name="innumber" value="<?php echo (!empty($row["number"])) ? $row["number"] : ""; ?>"  min="0" required />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("room amout"); ?>
-                                    <input type="number" class="form-control" id="inamout" name="inamout" value="<?php echo (!empty($row["amout"])) ? $row["amout"] : ""; ?>"  min="0" required />
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("Price"); ?>
-                                    <input type="number" class="form-control" id="inPrice" name="inPrice" value="<?php echo (!empty($row["price"])) ? $row["price"] : ""; ?>" />
+                                    <input type="text" class="form-control " id="inDetail" name="inDetail" value="<?php echo (!empty($row["building_descriptions"])) ? $row["building_descriptions"] : ""; ?>" required />
                                 </div>
                             </div>
                             <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("year received"); ?>
-                                    <input type="number" class="form-control" id="inreceive" name="inreceive" value="<?php echo (!empty($row["receive"])) ? $row["receive"] : ""; ?>"  min="0" required />
+                                    <input type="number" class="form-control" id="inReceive" name="inReceive" value="<?php echo (!empty($row["building_purchase_year"])) ? $row["building_purchase_year"] : ""; ?>"  min="0" required />
                                 </div>
 
                                 <div class="col-md">
                                     <?php _label("State"); ?>
-                                    <select type="text" class="form-select tomselected " id="inBloodType" name="inBloodType">
+                                    <select type="text" class="form-select tomselected " id="inStatus" name="inStatus" required>
                                         <option value="">เลือกข้อมูล</option>
-                                        <?php $blood = array("O", "A", "B"); ?>
+                                        <?php $blood = array("ปกติ", "ไม่ได้ใช้งาน"); ?>
                                         <?php foreach ($blood as $b) { ?>
-                                            <?php $sel = (!empty($row["bloodtype"]) && $row["bloodtype"] == $b) ? "selected" : ""; ?>
+                                            <?php $sel = (!empty($row["building_status"]) && $row["building_status"] == $b) ? "selected" : ""; ?>
                                             <option value="<?php echo $b ?>" <?php echo $sel ?>><?php echo $b ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("image1"); ?>
-                                    <input type="file" class="form-control" id="inPhoneNumber" name="inPhoneNumber" value="<?php echo (!empty($row["phonenumber"])) ? $row["phonenumber"] : ""; ?>" />
-                                </div>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md">
-                                    <?php _label("image2"); ?>
-                                    <select type="text" class="form-select tomselected " id="inReligion" name="inReligion" value="" tabindex="-1">
-                                        <option value="">เลือกข้อมูล</option>
-                                        <?php $religion = array("พุทธ", "คริสต์", "อิสลาม"); ?>
-                                        <?php foreach ($religion as $r) { ?>
-                                            <?php $sel = (!empty($row["religion"]) && $row["religion"] == $r) ? "selected" : ""; ?>
-                                            <option value="<?php echo $r ?>" <?php echo $sel ?>><?php echo $r ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="col-md">
-                                    <?php _label("image3"); ?>
-                                    <select type="text" class="form-select tomselected " id="inEthnicity" name="inEthnicity" value="" tabindex="-1">
-                                        <option value="">เลือกข้อมูล</option>
-                                        <?php $ethnicity = array("ไทย", "อังกฤษ"); ?>
-                                        <?php foreach ($ethnicity as $e) { ?>
-                                            <?php $sel = (!empty($row["ethnicity"]) && $row["ethnicity"] == $e) ? "selected" : ""; ?>
-                                            <option value="<?php echo $e ?>" <?php echo $sel ?>><?php echo $e ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -110,3 +75,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    $("#insert-form").submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: " <?php echo (!empty($this->uri->segment(2))) ? site_url("BuildingController/update_building") : site_url("BuildingController/insert_building"); ?>",
+            data: $(this).serialize(),
+        }).done(function(data) {
+            alert ("บันทึกข้อมูลสำเร็จ");
+            //$("#inFirstName").addClass("is-invalid");
+            location.reload();
+        });
+    });
+</script>

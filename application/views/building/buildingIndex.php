@@ -34,29 +34,53 @@
     <div class="container-xl">
         <div class="card">
             <div class="card-body table-responsive">
-                <table id="PersonelTable" class="display responsive nowrap" style="width:100%;margin:10 0 10 0;">
+                <table id="BuildingTable" class="display responsive nowrap" style="width:100%;margin:10 0 10 0;">
                     <!-- text-nowrap -->
                     <thead>
                         <tr>
                             <th class="w-1">No.</th>
                             <th style="width:5%;">Type</th>
+                            <th style="width:5%;">Name</th>
                             <th style="width:17%;">Detail</th>
-                            <th style="width:5%;">Image1</th>
-                            <th style="width:5%;">Image2</th>
-                            <th style="width:5%;">Image3</th>
                             <th style="width:5%;">State</th>
-                            <th style="width:5%;"></th>
+                            <th style="width:5%;">Purchase Year</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <td>1</td>
-                        <td>type</td>
-                        <td>detail</td>
-                        <td><img src="../../../assets/Toothless.png" alt="image1"></td>
-                        <td>image2</td>
-                        <td>image3</td>
-                        <td>state</td>
-                        <td>null</td>
+                    <?php $i = 1;
+                        foreach ($building as $b) { ?>
+                            <tr>
+                                <td>
+                                    <?php echo $i ?>
+                                </td>
+                                <td>
+                                <?php echo $b["building_type_name"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $b["building_name"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $b["building_descriptions"] ?>
+                                </td>
+                                
+                                <td>
+                                    <?php echo $b["building_status"] ?>
+                                </td>
+                                <td>
+                                    <?php echo $b["building_purchase_year"] ?>
+                                </td>
+                                <td class='text-center'>
+                                    <button class="btn btn-edit" id="<?php echo $b["building_id"] ?>">
+                                        <i class='ti ti-edit'></i>Edit
+                                    </button>
+                                    <button class="btn btn-delete" id="<?php echo $b["building_id"] ?>">
+                                        <i class='ti ti-trash'></i>Delete
+                                        </button>
+                                </td>
+                            </tr>
+                            <?php $i++;
+                        } ?>
                     </tbody>
                 </table>
             </div>
@@ -65,7 +89,7 @@
 </div>
 
 <script>
-    $('#PersonelTable').DataTable({
+    $('#BuildingTable').DataTable({
         // responsive: true,
         columnDefs: [
             {
@@ -86,16 +110,16 @@
     });
 
     $(".btn-edit").on("click", function () {
-        location.href = "<?php echo site_url("personnel-edit-form/"); ?>" + $(this).attr('id');
+        location.href = "<?php echo site_url("building-edit-form/"); ?>" + $(this).attr('id');
     });
 
     $(".btn-delete").on("click", function () {
         if (confirm("delete ?")) {
             $.ajax({
                 type: "POST",
-                url: "<?php echo site_url("PersonnelController/delete_personnel") ?>",
+                url: "<?php echo site_url("BuildingController/delete_building") ?>",
                 data: {
-                    inPer: $(this).attr('id')
+                    inBld: $(this).attr('id')
                 },
             }).done(function (data) {
                
