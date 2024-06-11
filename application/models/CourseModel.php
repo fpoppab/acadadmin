@@ -11,7 +11,6 @@ class CourseModel extends CI_Model
         $this->db->join('tb_school_class_register b', 'b.id = a.school_class_register_id');
         $this->db->join('tb_school_class c', 'c.id = b.school_class_id');
         $this->db->join('tb_group_learning g', 'g.id = a.group_learning_id');
-        $this->db->where(array('g.displaystatus' => 1));
     }
 
     #ดึงข้อมูลวิชา

@@ -39,6 +39,15 @@ class BuildingModel extends CI_Model
         }
     }
 
+    #ดึงข้อมูลประเภทอาคาร
+    public function get_building_type()
+    {
+        $this->db->select('b.id as building_type_id,b.name as building_type_name,b.code as building_type_code');
+        $this->db->from('tb_building_type b');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     #เพิ่มข้อมูลอาคาร (insert or update)
     public function update_building($data)
     {
