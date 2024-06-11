@@ -5,6 +5,8 @@ class CourseModel extends CI_Model
     public function course_pattern()
     {
         $this->db->select('a.*,a.id as course_id');
+        $this->db->select('CONCAT(c.name, "ปีที่ ", c.level) as clss_name');
+        $this->db->select('g.name as group_learning_name');
         $this->db->from('tb_course a');
         $this->db->join('tb_school_class_register b', 'b.id = a.school_class_register_id');
         $this->db->join('tb_school_class c', 'c.id = b.school_class_id');
