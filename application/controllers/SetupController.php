@@ -397,7 +397,7 @@ class SetupController extends CI_Controller
                         'username' => $r["idcard"],
                         'type' => 'user',
                         'email' => 'acad' . $r["id"] . '@email.com',
-                        'password' => password_hash($r["idcard"] . "@ttk1", PASSWORD_DEFAULT),
+                        'password' => password_hash($r["idcard"], PASSWORD_DEFAULT),
                         'remember_token' => 'acad_token',
                         'created_at' => strtotime(date('Y-m-d h:i:s')),
                         'updated_at' => strtotime(date('Y-m-d h:i:s'))
