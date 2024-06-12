@@ -101,9 +101,9 @@ $route['course-insert-form']='CourseController/courseInsertForm';
 $route['course-edit-form/(:num)']='CourseController/courseEditForm/$1';
 $route['course-register']='CourseController/courseRegisterIndex';
 
-$route['public-relations']='PublicRelationController/publicrelationIndex';
-$route['public-relations-insert-form']='PublicRelationController/publicrelationInsertForm';
-$route['public-relations-edit-form/(:num)']='PublicRelationController/publicrelationEditForm/$1';
+$route['public-relations']='PublicRelationsController/publicrelationsIndex';
+$route['public-relations-insert-form']='PublicRelationsController/publicrelationsInsertForm';
+$route['public-relations-edit-form/(:num)']='PublicRelationsController/publicrelationsEditForm/$1';
 
 $route['learning-resources']='LearningResourcesController/learningResourcesIndex';
 $route['learning-resources-insert-form']='LearningResourcesController/learningResourcesInsertForm';
