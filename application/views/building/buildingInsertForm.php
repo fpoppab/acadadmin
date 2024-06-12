@@ -81,7 +81,7 @@
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: " <?php echo (!empty($this->uri->segment(2))) ? site_url("BuildingController/update_building") : site_url("BuildingController/insert_building"); ?>",
+            url: " <?php echo site_url("BuildingController/update_building") ?>",
             data: $(this).serialize(),
         }).done(function(data) {
             alert ("บันทึกข้อมูลสำเร็จ");
