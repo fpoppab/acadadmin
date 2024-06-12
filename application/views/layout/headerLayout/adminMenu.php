@@ -87,13 +87,15 @@
             <i class="ti ti-school"></i>
         </span>
         <span class="nav-link-title">
-            building
+            General
         </span>
     </a>
     <div class="dropdown-menu">
         <div class="dropdown-menu-columns">
             <div class="dropdown-menu-column">
                 <?php menu_a("building", "building"); ?>
+                <?php menu_a("public relations", "public-relations"); ?>
+                <?php menu_a("learning resources", "learning-resources"); ?>
             </div>
         </div>
     </div>
