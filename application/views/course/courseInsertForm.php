@@ -5,7 +5,7 @@
         <div class="row g-2 align-items-center">
             <div class="col">
                 <h2 class="page-title text-muted">
-                    <a class='text-blue' href="<?php echo site_url("personnel"); ?>">Course</a>/
+                    <a class='text-blue' href="<?php echo site_url("course"); ?>">Course</a>/
                     <?php echo (!empty($this->uri->segment(2))) ? "Edit Course" : "Create new Course"; ?>
                 </h2>
             </div>
