@@ -107,4 +107,4 @@ $route['public-relations-edit-form/(:num)']='PublicRelationsController/publicrel
 
 $route['learning-resources']='LearningResourcesController/learningResourcesIndex';
 $route['learning-resources-insert-form']='LearningResourcesController/learningResourcesInsertForm';
-$route['learning-resources-edit-form/(:num)']='LearningResourcesController/learningResourcesEditForm/$1';
+$route['learning-resources-edit-form/(:num)']='LearningResourcesController/learningResourcesEditForm/$1'; 
