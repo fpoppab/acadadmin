@@ -26,7 +26,7 @@
                             <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("กลุ่มสาระ"); ?>
-                                    <select class="form-select tomselected " id="inGroup_Learning_id" name="inGroup_Learning_id">
+                                    <select class="form-select tomselected " id="inGroup_Learning_id" name="inGroup_Learning_id" required>
                                     <option value="">เลือกข้อมูล</option>
                                         <?php foreach ($group_learning as $g) { ?>
                                             <?php $sel = (!empty($row["group_learning_id"]) && $row["group_learning_id"] == $g["group_learning_id"]) ? "selected" : ""; ?>
@@ -37,7 +37,7 @@
 
                                 <div class="col-md">
                                 <?php _label("ระดับชั้น"); ?>
-                                <select class="form-select tomselected " id="inSchool_Class_Register_id" name="inSchool_Class_Register_id">
+                                <select class="form-select tomselected " id="inSchool_Class_Register_id" name="inSchool_Class_Register_id" required>
                                     <option value="">เลือกข้อมูล</option>
                                         <?php foreach ($school_clss as $s) { ?>
                                             <?php $sel = (!empty($row["clss_id"]) && $row["clss_id"] == $s["clss_id"]) ? "selected" : ""; ?>
@@ -51,11 +51,11 @@
                                 </div>
                                 <div class="col-md">
                                     <?php _label("รหัสวิชา"); ?>
-                                    <input type="text" class="form-control" id="inCode" name="inCode" value="<?php echo (!empty($row["course_code"])) ? $row["course_code"] : ""; ?>" />
+                                    <input type="text" class="form-control" id="inCode" name="inCode" value="<?php echo (!empty($row["course_code"])) ? $row["course_code"] : ""; ?>" required/>
                                 </div>
                                 <div class="col-md">
                                     <?php _label("ประเภท"); ?>
-                                    <select type="text" class="form-select tomselected " id="inType" name="inType">
+                                    <select type="text" class="form-select tomselected " id="inType" name="inType" required>
                                         <option value="">เลือกข้อมูล</option>
                                         <?php $type_c = array("พื้นฐาน","เพิ่มเติม","กิจกรรม","เลือกเรียน"); ?>
                                         <?php foreach ($type_c as $t) { ?>
@@ -68,7 +68,7 @@
                             <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("จำนวนชั่วโมงเรียนต่อสัปดาห์"); ?>
-                                    <select type="text" class="form-select tomselected " id="inHours_Per_Week" name="inHours_Per_Week">
+                                    <select type="text" class="form-select tomselected " id="inHours_Per_Week" name="inHours_Per_Week" required>
                                         <option value="">เลือกข้อมูล</option>
                                         <?php $hours_per_week = array("1","2","3","4","5","6"); ?>
                                         <?php foreach ($hours_per_week as $h) { ?>

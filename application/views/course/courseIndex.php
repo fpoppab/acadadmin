@@ -44,7 +44,7 @@
                             <th style="width:7%;">ชื่อวิชา</th>
                             <th style="width:7%;">ประเภท</th>
                             <th style="width:7%;">ชั่วโมงเรียนต่อสัปดาห์</th>
-                            <th style="width:7%;">Bloodtype</th>
+                            <th style="width:7%;"></th>
                         </tr>
                     </thead>
                     <tbody>
