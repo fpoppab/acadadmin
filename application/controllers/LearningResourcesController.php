@@ -15,7 +15,7 @@ class LearningResourcesController extends CI_Controller
     
     public function learningResourcesIndex()
     {
-        $data["learningresources"] = $this->LearningResourcesModel->get_learningResources($this->session->userdata("userSchoolId"));
+        $data["learningresources"] = $this->LearningResourcesModel->get_learningResources($this->session->userdata("userSchoolId"), $this->input->get("Type"));
         
         $this->load->view("layout/header");
         $this->load->view("learning-resources/learningresourcesIndex", $data);

@@ -33,6 +33,17 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card">
+            <div class="card-header">
+            <?php _label("ประเภทแหล่งเรียนรู้"); ?>
+                                    <select type="text" class="form-select tomselected " id="inType" name="inType">
+                                        <option value="">เลือกข้อมูล</option>
+                                        <?php $type = array("ภายนอก","ภายใน"); ?>
+                                        <?php foreach ($type as $t) { ?>
+                                            <?php $sel = ($this->input->get("Type") && $this->input->get("Type") == $t) ? "selected" : ""; ?>
+                                            <option value="<?php echo $t ?>" <?php echo $sel ?>><?php echo $t ?></option>
+                                        <?php } ?>
+                                    </select>
+            </div>
             <div class="card-body table-responsive">
                 <table id="LearningResourcesTable" class="display responsive nowrap" style="width:100%;margin:10 0 10 0;">
                     <!-- text-nowrap -->
@@ -113,6 +124,10 @@
 
     $(".btn-edit").on("click", function () {
         location.href = "<?php echo site_url("learning-resources-edit-form/"); ?>" + $(this).attr('id');
+    });
+
+    $("#inType").on("change", function () {
+        location.href = "<?php echo site_url("learning-resources"); ?>?Type=" + $("#inType").val();
     });
 
     $(".btn-delete").on("click", function () {

@@ -32,6 +32,26 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card">
+        <div class="card-header">
+        <?php _label("กลุ่มสาระ"); ?>
+                                    <select class="form-select tomselected " id="inGroup_Learning_id" name="inGroup_Learning_id" >
+                                    <option value="">เลือกข้อมูล</option>
+                                        <?php foreach ($group_learning as $g) { ?>
+                                            <?php $sel = ($this->input->get("Group_Learning") && $this->input->get("Group_Learning") == $g["group_learning_id"]) ? "selected" : ""; ?>
+                                            <option value="<?php echo $g["group_learning_id"] ?>" <?php echo $sel ?>><?php echo $g["group_learning_name"] ?></option>
+                                        <?php } ?>
+                                    </select>
+        <?php _label("ประเภท"); ?>
+                                    <select type="text" class="form-select tomselected " id="inType" name="inType" >
+                                        <option value="">เลือกข้อมูล</option>
+                                        <?php $type_c = array("พื้นฐาน","เพิ่มเติม","กิจกรรม","เลือกเรียน"); ?>
+                                        <?php foreach ($type_c as $t) { ?>
+                                            <?php $sel = ($this->input->get("Type") && $this->input->get("Type") == $t) ? "selected" : ""; ?>
+                                            <option value="<?php echo $t ?>" <?php echo $sel ?>><?php echo $t ?></option>
+                                        <?php } ?>
+                
+                </select>
+            </div>
             <div class="card-body table-responsive">
                 <table id="CourseTable" class="display responsive nowrap" style="width:100%;margin:10 0 10 0;">
                     <!-- text-nowrap -->
@@ -112,6 +132,12 @@
 
     $(".btn-edit").on("click", function () {
         location.href = "<?php echo site_url("course-edit-form/"); ?>" + $(this).attr('id');
+    });
+    $("#inGroup_Learning_id").on("change", function () {
+        location.href = "<?php echo site_url("course"); ?>?Group_Learning=" + $("#inGroup_Learning_id").val()+"&Type="+$("#inType").val();
+    });   
+    $("#inType").on("change", function () {
+        location.href = "<?php echo site_url("course"); ?>?Group_Learning=" + $("#inGroup_Learning_id").val()+"&Type="+$("#inType").val();
     });
 
     $(".btn-delete").on("click", function () {

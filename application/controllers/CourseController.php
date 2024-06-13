@@ -22,8 +22,8 @@ class CourseController extends CI_Controller
     }
     public function courseIndex()
     {
-        $data["course"] = $this->CourseModel->get_course($this->session->userdata("userSchoolId"));
-        
+        $data["course"] = $this->CourseModel->get_course($this->session->userdata("userSchoolId"),$this->input->get("Group_Learning"), $this->input->get("Type"));
+        $data["group_learning"] = $this->SyllabusModel->get_group_learning();
         $this->load->view("layout/header");
         $this->load->view("course/courseIndex", $data);
         $this->load->view("layout/footer");
