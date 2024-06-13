@@ -12,7 +12,7 @@ class BuildingModel extends CI_Model
     }
 
     #ดึงข้อมูลอาคารทั้งหมดในโรงเรียน
-    public function get_building($school_id, $type_id = null)
+    public function get_building($school_id, $type_id = null, $status = null)
     {
         if (!empty($school_id)) {
             $this->building_pattern();
@@ -23,6 +23,10 @@ class BuildingModel extends CI_Model
                 $this->db->where(array('a.building_type_id' => $type_id));
             }
 
+            #ดึงข้อมูลอาคารเดียวโดยใช้สถานะ
+            if (!empty($status)) {
+                $this->db->where(array('a.status' => $type_id));
+            }
             $query = $this->db->get();
             return $query->result_array();
         }
