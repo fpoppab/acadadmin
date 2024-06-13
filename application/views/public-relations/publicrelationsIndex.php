@@ -20,7 +20,8 @@
                         class="btn btn-primary d-none d-sm-inline-block">
                         <i class='ti ti-plus'></i>Create new Public Relations
                     </a>
-                    <a href="<?php echo site_url("public-relations-insert-form"); ?>" class="btn btn-primary d-sm-none btn-icon">
+                    <a href="<?php echo site_url("public-relations-insert-form"); ?>"
+                        class="btn btn-primary d-sm-none btn-icon">
                         <i class='ti ti-plus'></i>
                     </a>
                 </div>
@@ -33,6 +34,17 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card">
+            <div class="card-header">
+                <?php _label("Type"); ?>
+                <select type="text" class="form-select tomselected " id="inType" name="inType">
+                    <option value="">เลือกข้อมูล</option>
+                    <?php $type = array("ภายใน", "ภายนอก"); ?>
+                    <?php foreach ($type as $t) { ?>
+                        <?php $sel = (!empty($this->input->get("Type")) && $this->input->get("Type") == $t) ? "selected" : ""; ?>
+                        <option value="<?php echo $t ?>" <?php echo $sel ?>><?php echo $t ?></option>
+                    <?php } ?>
+                </select>
+            </div>
             <div class="card-body table-responsive">
                 <table id="PublicRelationsTable" class="display responsive nowrap" style="width:100%;margin:10 0 10 0;">
                     <!-- text-nowrap -->
@@ -57,7 +69,7 @@
                                     <?php echo $i ?>
                                 </td>
                                 <td>
-                                <?php echo $pr["pr_topic"] ?>
+                                    <?php echo $pr["pr_topic"] ?>
                                 </td>
                                 <td>
                                     <?php echo $pr["pr_descriptions"] ?>
@@ -65,7 +77,7 @@
                                 <td>
                                     <?php echo $pr["pr_type"] ?>
                                 </td>
-                                
+
                                 <td>
                                     <?php echo tothaishortdate($pr["pr_startdate"]) ?>
                                 </td>
@@ -81,7 +93,7 @@
                                     </button>
                                     <button class="btn btn-delete" id="<?php echo $pr["pr_id"] ?>">
                                         <i class='ti ti-trash'></i>Delete
-                                        </button>
+                                    </button>
                                 </td>
                             </tr>
                             <?php $i++;
@@ -127,11 +139,16 @@
                     inPr: $(this).attr('id')
                 },
             }).done(function (data) {
-               
+
                 location.reload();
             });
         } else {
 
         }
     });
+
+    $("#inType").on("change", function () {
+        location.href = '<?php echo site_url("public-relations"); ?>?Type='+$("#inType").val();
+    });
+
 </script>

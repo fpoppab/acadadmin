@@ -14,17 +14,18 @@ class BuildingController extends CI_Controller
 
     public function buildingIndex()
     {
-        $data["building"]=$this->BuildingModel->get_building($this->session->userdata("userSchoolId"));
+        $data["building_type"] = $this->BuildingModel->get_building_type();
+        $data["building"] = $this->BuildingModel->get_building($this->session->userdata("userSchoolId"),$this->input->get("Type"),$this->input->get("Status"));
         $this->load->view("layout/header");
-        $this->load->view("building/buildingIndex",$data);
+        $this->load->view("building/buildingIndex", $data);
         $this->load->view("layout/footer");
     }
 
     public function buildingInsertForm()
     {
-        $data["building_type"]=$this->BuildingModel->get_building_type();
+        $data["building_type"] = $this->BuildingModel->get_building_type();
         $this->load->view("layout/header");
-        $this->load->view("building/buildingInsertForm",$data);
+        $this->load->view("building/buildingInsertForm", $data);
         $this->load->view("layout/footer");
     }
 
@@ -46,7 +47,7 @@ class BuildingController extends CI_Controller
             "descriptions" => $this->input->post("inDetail"),
             "purchase_year" => $this->input->post("inReceive"),
             "status" => $this->input->post("inStatus")
-            
+
         );
         echo $this->BuildingModel->update_building($arr);
     }
@@ -61,7 +62,7 @@ class BuildingController extends CI_Controller
             "descriptions" => $this->input->post("inDetail"),
             "purchase_year" => $this->input->post("inReceive"),
             "status" => $this->input->post("inStatus")
-            
+
         );
         echo $this->BuildingModel->update_building($arr, $this->input->post("inBld"));
     }

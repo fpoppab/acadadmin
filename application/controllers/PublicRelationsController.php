@@ -14,7 +14,7 @@ class PublicRelationsController extends CI_Controller
 
     public function publicrelationsIndex()
     {
-        $data["publicrelations"]=$this->PublicRelationsModel->get_publicRelations($this->session->userdata("userSchoolId"));
+        $data["publicrelations"]=$this->PublicRelationsModel->get_publicRelations($this->session->userdata("userSchoolId"),$this->input->get("Type"));
         $this->load->view("layout/header");
         $this->load->view("public-relations/publicrelationsIndex",$data);
         $this->load->view("layout/footer");

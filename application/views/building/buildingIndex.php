@@ -33,6 +33,25 @@
 <div class="page-body">
     <div class="container-xl">
         <div class="card">
+            <div class="card-header">
+                <?php _label("Type"); ?>
+                <select class="form-select tomselected " id="inType" name="inType" required>
+                    <option value="">เลือกข้อมูล</option>
+                    <?php foreach ($building_type as $t) { ?>
+                        <?php $sel = (!empty($this->input->get("Type")) && $this->input->get("Type") == $t["building_type_id"]) ? "selected" : ""; ?>
+                        <option value="<?php echo $t["building_type_id"] ?>" <?php echo $sel ?>><?php echo $t["building_type_name"] ?></option>
+                    <?php } ?>
+                </select>
+                <?php _label("State"); ?>
+                <select type="text" class="form-select tomselected " id="inStatus" name="inStatus">
+                    <option value="">เลือกข้อมูล</option>
+                    <?php $status = array("ปกติ", "ไม่ได้ใช้งาน"); ?>
+                    <?php foreach ($status as $b) { ?>
+                        <?php $sel = (!empty($this->input->get("Status")) && $this->input->get("Status") == $b) ? "selected" : ""; ?>
+                        <option value="<?php echo $b ?>" <?php echo $sel ?>><?php echo $b ?></option>
+                    <?php } ?>
+                </select>
+                </div>
             <div class="card-body table-responsive">
                 <table id="BuildingTable" class="display responsive nowrap" style="width:100%;margin:10 0 10 0;">
                     <!-- text-nowrap -->
@@ -129,4 +148,12 @@
 
         }
     });
+
+    $("#inType").on("change", function () {
+        location.href = '<?php echo site_url("building"); ?>?Type='+$("#inType").val()+"&Status="+$("#inStatus").val();
+    });
+    $("#inStatus").on("change", function () {
+        location.href = '<?php echo site_url("building"); ?>?Type='+$("#inType").val()+"&Status="+$("#inStatus").val();
+    });
+
 </script>
