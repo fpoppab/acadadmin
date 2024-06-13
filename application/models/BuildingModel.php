@@ -25,7 +25,7 @@ class BuildingModel extends CI_Model
 
             #ดึงข้อมูลอาคารเดียวโดยใช้สถานะ
             if (!empty($status)) {
-                $this->db->where(array('a.status' => $type_id));
+                $this->db->where(array('a.status' => $status));
             }
             $query = $this->db->get();
             return $query->result_array();
