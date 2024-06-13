@@ -14,11 +14,16 @@ class CourseModel extends CI_Model
     }
 
     #ดึงข้อมูลวิชา
-    public function get_course($school_id, $group_learning_id = null, $school_class_register_id = null)
+    public function get_course($school_id, $group_learning_id = null, $course_type = null, $school_class_register_id = null)
     {
         if (!empty($school_id)) {
             $this->course_pattern();
             $this->db->where(array('b.school_id' => $school_id));
+
+            #ดึงข้อมูลวิชาโดยใช้ประเภทวิชา
+            if (!empty($course_type)) {
+                $this->db->where(array('a.type' => $course_type));
+            }
 
             #ดึงข้อมูลวิชาโดยใช้ ID ของ Group Learning
             if (!empty($group_learning_id)) {
