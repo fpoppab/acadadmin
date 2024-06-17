@@ -96,6 +96,8 @@
                 <?php menu_a("building", "building"); ?>
                 <?php menu_a("public relations", "public-relations"); ?>
                 <?php menu_a("learning resources", "learning-resources"); ?>
+                <?php menu_a("school vehicle", "school-vehicle"); ?>
+                <?php menu_a("school nutrition", "school-nutrition"); ?>
             </div>
         </div>
     </div>
