@@ -108,3 +108,11 @@ $route['public-relations-edit-form/(:num)']='PublicRelationsController/publicrel
 $route['learning-resources']='LearningResourcesController/learningResourcesIndex';
 $route['learning-resources-insert-form']='LearningResourcesController/learningResourcesInsertForm';
 $route['learning-resources-edit-form/(:num)']='LearningResourcesController/learningResourcesEditForm/$1'; 
+
+$route['vehicle']= 'VehicleController/vehicleIndex';
+$route['vehicle-insert-form']= 'VehicleController/vehicleInsertForm';
+$route['vehicle-edit-form/(:num)']= 'VehicleController/vehicleEditForm/$1';
+
+$route['nutrition']='NutritionController/nutritionIndex';
+$route['nutrition-insert-form']='NutritionController/nutritionInsertForm';
+$route['nutrition-edit-form/(:num)']='NutritionController/nutritionEditForm/$1';
