@@ -51,11 +51,25 @@ class PersonnelModel extends CI_Model
     #ดึงข้อมูลบุคลากรที่เป็นครูประจำชั้น(ห้อง)จาก room_id
     public function get_personnel_by_room_id($room_id)
     {
-        if (!empty($user_id)) {
+        if (!empty($room_id)) {
             $this->personel_pattern();
             $this->db->join('tb_room_teacher rt', 'rt.personnel_register_id = b.id');
             $this->db->join('tb_room r', 'r.id = rt.room_id');
             $this->db->where('r.id', $room_id);
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+    }
+
+    #ดึงข้อมูลบุคลากรที่ยังไม่ได้เป็นครูประจำชั้น(ห้อง)จาก room_id
+    public function get_personnel_by_room_id_available($school_id)
+    {
+        if (!empty($school_id)) {
+            $this->personel_pattern();
+            $this->db->join('tb_room_teacher rt', 'rt.personnel_register_id = b.id','LEFT OUTER');
+            $this->db->join('tb_room r', 'r.id = rt.room_id','LEFT OUTER');
+            $this->db->where('rt.id', null);
+            $this->db->where(array('d.id' => $school_id));
             $query = $this->db->get();
             return $query->result_array();
         }
