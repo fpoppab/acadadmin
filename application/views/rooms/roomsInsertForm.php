@@ -29,6 +29,7 @@
                                         <option value="">เลือกข้อมูล</option>
                                         <?php foreach ($clss as $c) { ?>
                                             <?php $sel = (!empty($row["clss_id"]) && $row["clss_id"] == $c["clss_id"]) ? "selected" : ""; ?>
+                                            <?php $sel .= (!empty($this->input->get("ClssId")) && $this->input->get("ClssId") == $c["clss_id"]) ? "selected" : ""; ?>
                                             <option value="<?= $c["clss_id"]; ?>" <?= $sel; ?>>
                                                 <?= $c["clss_name"] ?>
                                             </option>
@@ -38,7 +39,6 @@
                                 <div class="col-md">
                                     <?php _label("Educatioin plan", "required"); ?>
                                     <select class="form-select" id="inPlanId" name="inPlanId" required>
-                                        <option value="">เลือกข้อมูล</option>
                                         <?php foreach ($plan as $p) { ?>
                                             <?php $sel = (!empty($row["ed_plan_id"]) && $row["ed_plan_id"] == $p["ed_plan_id"]) ? "selected" : ""; ?>
                                             <option value="<?= $p["ed_plan_id"]; ?>" <?= $sel; ?>>
@@ -50,7 +50,7 @@
                                 <div class="col-md">
                                     <?php _label("Room number", "required"); ?>
                                     <input type="number" class="form-control " id="inRoomNumber" name="inRoomNumber"
-                                        value="<?php echo (!empty($row["number"])) ? $row["number"] : ""; ?>" min="0"
+                                        value="<?= (!empty($this->input->get("RoomNumber"))) ? $this->input->get("RoomNumber")+1 : ""; ?><?= (!empty($row["number"])) ? $row["number"] : ""; ?>" min="0"
                                         max="100" required />
                                 </div>
                             </div>
@@ -59,7 +59,31 @@
                         </div>
                         <div class="card-body">
                             <h2 class="mb-4">Homeroom teacher</h2>
-                            <div class="row g-3" style="overflow: scroll;">
+                            <div class="row g-3" style="overflow: scroll;">    
+                                <?php 
+                                if(!empty($teachers)){
+                                foreach ($teachers as $p) { ?>
+                                    <div class="col-md-3">
+                                        <label class="form-selectgroup-item flex-fill">
+                                            <input type="checkbox" name="inPersonnel[]" value="<?= $p["personel_regis_id"]?>"
+                                                class="form-selectgroup-input" checked>
+                                            <div class="form-selectgroup-label d-flex align-items-center p-2">
+                                                <div class="me-3">
+                                                    <span class="form-selectgroup-check"></span>
+                                                </div>
+                                                <div class="form-selectgroup-label-content d-flex align-items-center">
+                                                    <span class="avatar me-2"
+                                                        style="background-image: url(<?= $p["personnel_profile_image"]?>)"></span>
+                                                    <div>
+                                                        <div class="font-weight-medium"><?= $p["personnel_fullname"]?></div>
+                                                        <div class="text-secondary"><?= $p["type_name"]?></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                <?php } }?>
+
                                 <?php foreach ($personnel as $p) { ?>
                                     <div class="col-md-3">
                                         <label class="form-selectgroup-item flex-fill">
@@ -99,11 +123,15 @@
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "<?= site_url("SchoolController/update_room") ?>",
+            url: "<?= site_url("RoomController/update_room") ?>",
             data: $(this).serialize(),
         }).done(function (data) {
-            alert(data);
-            location.reload();
+            alert("บันทึกข้อมูลสำเร็จ !");
+            if($("#inRoomId").val()){
+                location.reload();
+            }else{
+                window.location.href = '<?= site_url("room-insert-form");?>?ClssId='+$("#inClssId").val()+'&RoomNumber='+$("#inRoomNumber").val();
+            }
         });
     });
 </script>
