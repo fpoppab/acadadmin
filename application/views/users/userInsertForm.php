@@ -25,6 +25,12 @@
                             value="<?php echo (!empty($this->uri->segment(2))) ? $this->uri->segment(2) : ""; ?>" />
                         <div class="card-body">
                             <h2 class="mb-4">User</h2>
+                            <h3 class="card-title">User Image</h3>
+
+                            <div class="row align-items-center">
+                                <?= imagelogo(array("inputID" => "inProfileImage")); ?>
+                            </div>
+
                             <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("Type"); ?>
@@ -47,14 +53,13 @@
                                 <div class="col-md">
                                     <?php _label("Password"); ?>
                                     <input type="text" class="form-control" id="inPassword" name="inPassword"
-                                        value="<?php echo (!empty($row["idcard"])) ? $row["idcard"] : ""; ?>" 
-                                        required/>
+                                        value="<?php echo (!empty($row["idcard"])) ? $row["idcard"] : ""; ?>"
+                                        required />
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Email"); ?>
                                     <input type="text" class="form-control" id="inEmail" name="inEmail"
-                                        value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>"
-                                         />
+                                        value="<?php echo (!empty($row["lastname"])) ? $row["lastname"] : ""; ?>" />
                                 </div>
                             </div>
                         </div>
@@ -70,6 +75,8 @@
     </div>
 </div>
 <script>
+
+
     $("#insert-form").submit(function (e) {
         e.preventDefault();
         $.ajax({

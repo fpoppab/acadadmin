@@ -11,31 +11,12 @@
             <!-- Page title actions -->
             <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
-                    <!-- <span class="d-none d-sm-inline">
-                        <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modal-report">
-                            Modal with form
-                        </a>
-                    </span> -->
-                    <a href="<?php echo site_url("user-insert-form"); ?>" class="btn btn-primary d-none d-sm-inline-block">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 5l0 14" />
-                            <path d="M5 12l14 0" />
-                        </svg>
-                        Create new user
+                    <a href="<?php echo site_url("user-insert-form"); ?>"
+                        class="btn btn-primary d-none d-sm-inline-block ">
+                        <i class='ti ti-plus'></i>Create new user
                     </a>
                     <a href="<?php echo site_url("user-insert-form"); ?>" class="btn btn-primary d-sm-none btn-icon">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 5l0 14" />
-                            <path d="M5 12l14 0" />
-                        </svg>
+                        <i class='ti ti-plus'></i>
                     </a>
                 </div>
             </div>
@@ -87,42 +68,21 @@
                                     <span class="badge bg-success me-1"></span> Active
                                 </td>
                                 <td class='text-center'>
-                                    <button class="btn btn-edit d-none d-sm-inline-block" id="<?php echo $r["id"] ?>">
-                                        <i class='ti ti-edit'></i>Edit
+                                    <button class="btn btn-edit" id="<?php echo $r["id"] ?>">
+                                        <i class='ti ti-edit'></i><span class="d-none d-sm-inline-block">Edit</span>
                                     </button>
-                                    <buttona class="btn btn-delete d-none d-sm-inline-block" id="<?php echo $r["id"] ?>">
-                                        <i class='ti ti-trash'></i>Delete
-                                        </button>
+                                    <button class="btn btn-delete " id="<?php echo $r["id"] ?>">
+                                        <i class='ti ti-trash'></i><span class="d-none d-sm-inline-block">Delete</span>
+                                    </button>
                                 </td>
                             </tr>
                             <?php $i++;
                         } ?>
-
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $('#usertable').DataTable({
-        // responsive: true,
-        columnDefs: [
-            {
-                className: 'dtr-control arrow-right',
-                orderable: false,
-                target: -1
-            }
-        ],
-        responsive: {
-            details: {
-                type: 'column',
-                target: -1
-            }
-        },
-        language: {
-            url: '<?php echo base_url("languages/en_DataTable.json") ?>'
-        }
-    });
-</script>
+
+<?= datatable(array("tablename" => "usertable")); ?>
