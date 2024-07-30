@@ -13,7 +13,7 @@
                 <ul class="list-inline list-inline-dots mb-0">
                     <li class="list-inline-item">
                         Copyright &copy; 2023
-                        <a href="http://facts.co.th/" class="link-secondary">FACTech Solutions</a>.
+                        <a href="#" class="link-secondary">PANNAWAT INTER GROUP CO., LTD</a>.
                         All rights reserved.
                     </li>
                 </ul>
