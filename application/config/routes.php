@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'welcome';
-$route['404_override'] = '';
+$route['404_override'] = 'ErrorController/error_404';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['auth/login'] = 'AuthenticationController/login';
@@ -81,17 +81,16 @@ $route['student-insert-form']='StudentController/studentInsertForm';
 $route['student-edit-form/(:num)']='StudentController/studentEditForm/$1';
 
 $route['school'] = 'SchoolController/schoolIndex';
-$route['room']='SchoolController/roomIndex';
-$route['room-insert-form']='SchoolController/roomInsertForm';
-$route['room-edit-form/(:num)']='SchoolController/roomEditForm/$1';
-$route['room-edit-list/(:num)']='SchoolController/roomEditList/$1';
+
+$route['room']='RoomController/roomIndex';
+$route['room-insert-form']='RoomController/roomInsertForm';
+$route['room-edit-form/(:num)']='RoomController/roomEditForm/$1';
+$route['room-edit-list/(:num)']='RoomController/roomEditList/$1';
 
 $route['student-promote']='StudentController/studentPromoteIndex';
 $route['student-report']='StudentController/studentReportIndex';
 $route['student-report-pp2/(:num)']='StudentController/studentPP2Report/$1';
 $route['student-import']='StudentController/inportStudent';
-
-
 
 $route['subject-teacher']='SchoolController/subjectTeacherIndex';
 
