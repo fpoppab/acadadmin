@@ -40,7 +40,7 @@ function datatable($config)
                     }
                 ],
                 language: {
-                    url: '" . base_url("languages/en_DataTable.json") . "'
+                    url: '" . base_url("languages/th_DataTable.json") . "'
                 }
             });
         </script>";
