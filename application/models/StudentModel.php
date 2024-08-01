@@ -8,10 +8,19 @@ class StudentModel extends CI_Model
         $this->db->select('c.no as c_address_no,c.moo as c_address_moo,c.tambol as c_address_tambol,c.amphur as c_address_amphur,c.province as c_address_province,c.zipcode as c_address_zipcode');
         $this->db->select('r.no as r_address_no,r.moo as r_address_moo,r.tambol as r_address_tambol,r.amphur as r_address_amphur,r.province as r_address_province,r.zipcode as r_address_zipcode');
         $this->db->select('a.id as std_id,CONCAT(a.titlename, a.firstname, " ", a.lastname) AS fullname');
+        $this->db->select('e.id as room_id,e.number as room_number,d.number as number,f.name as plan_name');
+        $this->db->select('CONCAT(h.name, "ปีที่ ", h.level,"/",e.number) AS clss_room');
+        $this->db->select('CONCAT(h.abbreviation, ".", h.level,"/",e.number) AS clss_room_ab');
+        $this->db->select('h.id as school_clss_id,g.id as clss_id,e.id as room_id');
         $this->db->from('tb_student a');
         $this->db->join('tb_student_register b', 'b.student_id = a.id');
         $this->db->join('tb_student_current_address c', 'c.student_id = a.id', 'LEFT OUTER');
         $this->db->join('tb_student_registered_address r', 'r.student_id = a.id', 'LEFT OUTER');
+        $this->db->join('tb_room_members d', 'd.student_id = a.id', 'LEFT OUTER');
+        $this->db->join('tb_room e', 'e.id = d.room_id AND e.edyear =' . $this->session->userdata("userEdyear"), 'LEFT OUTER');
+        $this->db->join('tb_education_plan f', 'f.id = e.education_plan_id', 'LEFT OUTER');
+        $this->db->join('tb_school_class_register g', 'g.id = e.school_class_register_id', 'LEFT OUTER');
+        $this->db->join('tb_school_class h', 'h.id = g.school_class_id', 'LEFT OUTER');
     }
 
     public function get_student()
@@ -92,6 +101,22 @@ class StudentModel extends CI_Model
             $this->db->insert('tb_student_register', $student);
         }
         $this->db->reset_query();
+
+        #ข้อมูลการศึกษา
+        if (!empty($data["room_id"])) {
+            $clssroom = array(
+                "student_id" => $std_id,
+                "room_id" => $data["room_id"],
+                "number" => $data["number"]
+            );
+            $chk = $this->db->select('a.id')->from('tb_room_members a')->join('tb_room b', 'b.id = a.room_id')->where('a.student_id', $std_id)->where('b.edyear', $this->session->userdata("userEdyear"))->get()->row_array();
+            if (!empty($chk['id'])) {
+                $this->db->where('id', $std_id);
+                $this->db->update('tb_room_members', $clssroom);
+            } else {
+                $this->db->insert('tb_room_members', $clssroom);
+            }
+        }
 
         #ข้อมูลที่อยู่ตามทะเบียนบ้าน
         $r_address = array(
