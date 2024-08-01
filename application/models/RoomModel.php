@@ -30,6 +30,17 @@ class RoomModel extends CI_Model
         }
     }
 
+    public function get_room_by_clss_id($clss_id)
+    {
+        if (!empty($clss_id)) {
+            $this->room_pattern();
+            $this->db->where("b.id", $clss_id);
+            $query = $this->db->get();
+            return $query->result_array();
+        } else {
+            return "missing parameter";
+        }
+    }
     public function get_room_detail_by_school_id($school_id)
     {
         if (!empty($school_id)) {
