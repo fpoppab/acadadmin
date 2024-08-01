@@ -3,7 +3,7 @@
     "info": "แสดง _START_ ถึง _END_ จาก _TOTAL_ แถว",
     "infoFiltered": "(กรองข้อมูล _MAX_ ทุกแถว)",
     "infoThousands": ",",
-    "lengthMenu": "แสดง _MENU_ แถว",
+    "lengthMenu": "_MENU_ ต่อแถว<span id='table-btn' style='margin-left:15px;'></span>",
     "loadingRecords": "กำลังโหลดข้อมูล...",
     "processing": "กำลังดำเนินการ...",
     "zeroRecords": "ไม่พบข้อมูล",
