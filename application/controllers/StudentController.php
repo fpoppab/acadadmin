@@ -62,10 +62,12 @@ class StudentController extends CI_Controller
             "lastname" => $this->input->post("inLastName"),
             "nickname" => $this->input->post("inNickName"),
             "idcard" => $this->input->post("inIdCard"),
-            "birthdate" => $this->input->post("inBirthDate"),
+            "birthdate" => $this->input->post("inBirthDateYear") . "-" . $this->input->post("inBirthDateMonth") . "-" . $this->input->post("inBirthDateDay"),
             "gender" => $this->input->post("inGenDer"),
             "bloodtype" => $this->input->post("inBloodType"),
-            "phonenumber" => $this->input->post("inPhoneNumber"),
+            // "phonenumber" => $this->input->post("inPhoneNumber"),
+            "phonenumber" => $this->input->post("inBirthDateYear") . "-" . $this->input->post("inBirthDateMonth") . "-" . $this->input->post("inBirthDateDay"),
+            
             "religion" => $this->input->post("inReligion"),
             "ethnicity" => $this->input->post("inEthnicity"),
             "nationality" => $this->input->post("inNationality"),
@@ -481,6 +483,8 @@ class StudentController extends CI_Controller
                             $cur_add["updated_at"] = strtotime(date("Y-m-d"));
                             $this->MainModel->insert_data('tb_student_current_address', $cur_add);
                         }
+                        #$this->load->model("StudentModel);
+                        #$this->StudentModel->update_student($arr,$std_id);
                     }
 
                     $stdnumber++;
@@ -498,6 +502,7 @@ class StudentController extends CI_Controller
             }
             @unlink($inFilename);
         }
+
     }
 
 }

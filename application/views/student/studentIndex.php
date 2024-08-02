@@ -87,7 +87,7 @@
                                     <?php echo $s["fullname"] ?>
                                 </td>
                                 <td>
-                                    <?php echo $s["clss_room"] ?>
+                                    <?php echo $s["clss_room_ab"] ?>
                                 </td>
                                 <td>
                                     <?php echo $s["idcard"] ?>

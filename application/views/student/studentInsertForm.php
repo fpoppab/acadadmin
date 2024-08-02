@@ -111,8 +111,7 @@
                             <div class="row g-3">
                                 <div class="col-md">
                                     <?php _label("Birth Date"); ?>
-                                    <input type="date" class="form-control" id="inBirthDate" name="inBirthDate"
-                                        value="<?php echo (!empty($row["birthdate"])) ? todate($row["birthdate"]) : ""; ?>" />
+                                    <?= _datepickerth("inBirthDate","inBirthDate",(!empty($row["birthdate"])) ? $row["birthdate"] : ""); ?>
                                 </div>
                                 <div class="col-md">
                                     <?php _label("Gender"); ?>
@@ -287,8 +286,6 @@
                                         <div class="accordion-body pt-0">
                                             <h3 class="card-title">Paren Image</h3>
                                             <div class="row g-3">
-                                                <?  // print_r($row);
-                                                ?>
                                                 <div class="row align-items-center">
                                                     <input type='file' id="inParentLogo" style="display:none;" />
                                                     <input type='hidden' id="inParentLogo64" name="inParentLogo64"
