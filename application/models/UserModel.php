@@ -21,6 +21,7 @@ class UserModel extends CI_Model
     {
         $this->db->select('*')->from('tb_user_log');
         $this->db->where(array('user_id' => $user_id));
+        $this->db->order_by("id","DESC");
         $query = $this->db->get();
         return $query->result_array();
     }

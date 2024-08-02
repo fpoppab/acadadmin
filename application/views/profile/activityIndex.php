@@ -25,7 +25,7 @@
                                         </div>
                                         <div class="col">
                                             <div class="text-truncate">
-                                            <?php echo $r["type"]?>
+                                                <?php echo $r["type"] ?>
                                                 <?php if ($r["status"] === "success") { ?>
                                                     <strong class="text-success">
                                                         <?php echo $r["status"] ?>
@@ -38,8 +38,7 @@
                                                 <?php echo $r["detail"] ?>
                                             </div>
                                             <div class="text-muted">
-                                                <?php //echo $r["created_at"]?>
-                                                <?php echo tothaishortdate($r["created_at"]); ?>
+                                                <?php echo date("Y-m-d h:i:s", $r["created_at"]); ?>
                                             </div>
                                         </div>
                                     </div>
