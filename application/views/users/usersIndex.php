@@ -10,15 +10,7 @@
             </div>
             <!-- Page title actions -->
             <div class="col-auto ms-auto d-print-none">
-                <div class="btn-list">
-                    <a href="<?php echo site_url("user-insert-form"); ?>"
-                        class="btn btn-primary d-none d-sm-inline-block ">
-                        <i class='ti ti-plus'></i>Create new user
-                    </a>
-                    <a href="<?php echo site_url("user-insert-form"); ?>" class="btn btn-primary d-sm-none btn-icon">
-                        <i class='ti ti-plus'></i>
-                    </a>
-                </div>
+
             </div>
         </div>
     </div>
@@ -32,10 +24,9 @@
                     <thead>
                         <tr>
                             <th class="w-1">No.</th>
+                            <th>Name</th>
                             <th>Email</th>
                             <th>Username</th>
-                            <th>Created At</th>
-                            <th>Updated At</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -50,6 +41,9 @@
                                     </span>
                                 </td>
                                 <td>
+                                    <?php echo $r["fullname"] ?>
+                                </td>
+                                <td>
                                     <a href="#" class="text-reset" tabindex="-1">
                                         <?php echo $r["email"] ?>
                                     </a>
@@ -58,22 +52,34 @@
                                     <?php echo $r["username"] ?>
                                 </td>
                                 <td>
-                                    <?php echo tothaishortdate($r["created_at"]); ?>
-                                </td>
-                                <td>
-                                    <?php echo tothaishortdate($r["updated_at"]); ?>
-                                </td>
-
-                                <td>
-                                    <span class="badge bg-success me-1"></span> Active
+                                    <?php if (!empty($r["username"])) { ?>
+                                        <?= ($r["status"]) ? "<span class='badge bg-success me-1'>Active</span>" : "<span class='badge bg-warning me-1'>Disable</span>"; ?>
+                                    <?php } else { ?>
+                                        <span class='badge bg-danger me-1'>No user</span>
+                                    <?php } ?>
                                 </td>
                                 <td class='text-center'>
-                                    <button class="btn btn-edit" id="<?php echo $r["id"] ?>">
-                                        <i class='ti ti-edit'></i><span class="d-none d-sm-inline-block">Edit</span>
-                                    </button>
-                                    <button class="btn btn-delete " id="<?php echo $r["id"] ?>">
-                                        <i class='ti ti-trash'></i><span class="d-none d-sm-inline-block">Delete</span>
-                                    </button>
+                                    <?php if ($r['status']) { ?>
+                                        <button class="btn btn-disable " id="<?php echo $r["user_id"] ?>">
+                                            <i class='ti ti-user-off'></i><span class="d-none d-sm-inline-block"> Disable</span>
+                                        </button>
+                                        <button class="btn btn-menu " id="<?php echo $r["user_id"] ?>">
+                                            <i class='ti ti-user-shield'></i><span class="d-none d-sm-inline-block">
+                                                Menu</span>
+                                        </button>
+                                    <?php } else { ?>
+                                        <?php if (empty($r["username"])) { ?>
+                                            <button class="btn btn-generate " id="<?php echo $r["id"] ?>">
+                                                <i class='ti ti-user-plus'></i></i><span class="d-none d-sm-inline-block"> Create
+                                                    user</span>
+                                            </button>
+                                        <?php } else { ?>
+                                            <button class="btn btn-enable " id="<?php echo $r["user_id"] ?>">
+                                                <i class='ti ti-user-check'></i><span class="d-none d-sm-inline-block">
+                                                    Enable</span>
+                                            <?php } ?>
+                                        </button>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php $i++;
@@ -86,3 +92,42 @@
 </div>
 
 <?= datatable(array("tablename" => "usertable")); ?>
+<script>
+    $(".btn-generate").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url("UserController/generate_user_by_personnel") ?>",
+            data: {
+                personnel_id: $(this).attr('id')
+            },
+        }).done(function (data) {
+            location.reload();
+        });
+    });
+
+    $(".btn-disable").on("click", function () {
+        if (confirm("คุณต้องการจะปิดการใช้งานผู้ใช้นี้ใช่หรือไม่ ?")) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url("UserController/disable_user") ?>",
+                data: {
+                    user_id: $(this).attr('id')
+                },
+            }).done(function (data) {
+                location.reload();
+            });
+        }
+    });
+
+    $(".btn-enable").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url("UserController/enable_user") ?>",
+            data: {
+                user_id: $(this).attr('id')
+            },
+        }).done(function (data) {
+            location.reload();
+        });
+    });
+</script>

@@ -65,53 +65,65 @@ $route['set_theme/(:any)'] = 'Welcome/set_theme/$1';
 $route['activity'] = 'ProfileController/activityIndex';
 $route['profile'] = 'ProfileController/profileIndex';
 
-$route['building']='BuildingController/buildingIndex';
-$route['building-insert-form']='BuildingController/buildingInsertForm';
-$route['building-edit-form/(:num)']='BuildingController/buildingEditForm/$1';
+$route['building'] = 'BuildingController/buildingIndex';
+$route['building-insert-form'] = 'BuildingController/buildingInsertForm';
+$route['building-edit-form/(:num)'] = 'BuildingController/buildingEditForm/$1';
 
 $route['users'] = 'UserController/usersIndex';
-$route['user-insert-form']='UserController/userInsertForm';
 
-$route['personnel']='PersonnelController/personnelIndex';
-$route['personnel-insert-form']='PersonnelController/personnelInsertForm';
-$route['personnel-edit-form/(:num)']='PersonnelController/personnelEditForm/$1';
+$route['personnel'] = 'PersonnelController/personnelIndex';
+$route['personnel-insert-form'] = 'PersonnelController/personnelInsertForm';
+$route['personnel-edit-form/(:num)'] = 'PersonnelController/personnelEditForm/$1';
 
-$route['student']='StudentController/studentIndex';
-$route['student-insert-form']='StudentController/studentInsertForm';
-$route['student-edit-form/(:num)']='StudentController/studentEditForm/$1';
+$route['student'] = 'StudentController/studentIndex';
+$route['student-insert-form'] = 'StudentController/studentInsertForm';
+$route['student-edit-form/(:num)'] = 'StudentController/studentEditForm/$1';
 
 $route['school'] = 'SchoolController/schoolIndex';
 
-$route['room']='RoomController/roomIndex';
-$route['room-insert-form']='RoomController/roomInsertForm';
-$route['room-edit-form/(:num)']='RoomController/roomEditForm/$1';
-$route['room-edit-list/(:num)']='RoomController/roomEditList/$1';
+$route['room'] = 'RoomController/roomIndex';
+$route['room-insert-form'] = 'RoomController/roomInsertForm';
+$route['room-edit-form/(:num)'] = 'RoomController/roomEditForm/$1';
+$route['room-edit-list/(:num)'] = 'RoomController/roomEditList/$1';
 
-$route['student-promote']='StudentController/studentPromoteIndex';
-$route['student-report']='StudentController/studentReportIndex';
-$route['student-report-pp2/(:num)']='StudentController/studentPP2Report/$1';
-$route['student-import']='StudentController/inportStudent';
+$route['student-promote'] = 'StudentController/studentPromoteIndex';
+$route['student-report'] = 'StudentController/studentReportIndex';
+$route['student-report-pp2/(:num)'] = 'StudentController/studentPP2Report/$1';
+$route['student-import'] = 'StudentController/inportStudent';
 
-$route['subject-teacher']='SchoolController/subjectTeacherIndex';
+$route['subject-teacher'] = 'SchoolController/subjectTeacherIndex';
 
-$route['syllabus']='CourseController/syllaBusIndex';
-$route['course']='CourseController/courseIndex';
-$route['course-insert-form']='CourseController/courseInsertForm';
-$route['course-edit-form/(:num)']='CourseController/courseEditForm/$1';
-$route['course-register']='CourseController/courseRegisterIndex';
+$route['syllabus'] = 'CourseController/syllaBusIndex';
+$route['course'] = 'CourseController/courseIndex';
+$route['course-insert-form'] = 'CourseController/courseInsertForm';
+$route['course-edit-form/(:num)'] = 'CourseController/courseEditForm/$1';
+$route['course-register'] = 'CourseController/courseRegisterIndex';
 
-$route['public-relations']='PublicRelationsController/publicrelationsIndex';
-$route['public-relations-insert-form']='PublicRelationsController/publicrelationsInsertForm';
-$route['public-relations-edit-form/(:num)']='PublicRelationsController/publicrelationsEditForm/$1';
+$route['public-relations'] = 'PublicRelationsController/publicrelationsIndex';
+$route['public-relations-insert-form'] = 'PublicRelationsController/publicrelationsInsertForm';
+$route['public-relations-edit-form/(:num)'] = 'PublicRelationsController/publicrelationsEditForm/$1';
 
-$route['learning-resources']='LearningResourcesController/learningResourcesIndex';
-$route['learning-resources-insert-form']='LearningResourcesController/learningResourcesInsertForm';
-$route['learning-resources-edit-form/(:num)']='LearningResourcesController/learningResourcesEditForm/$1'; 
+$route['learning-resources'] = 'LearningResourcesController/learningResourcesIndex';
+$route['learning-resources-insert-form'] = 'LearningResourcesController/learningResourcesInsertForm';
+$route['learning-resources-edit-form/(:num)'] = 'LearningResourcesController/learningResourcesEditForm/$1';
 
-$route['vehicle']= 'VehicleController/vehicleIndex';
-$route['vehicle-insert-form']= 'VehicleController/vehicleInsertForm';
-$route['vehicle-edit-form/(:num)']= 'VehicleController/vehicleEditForm/$1';
+$route['vehicle'] = 'VehicleController/vehicleIndex';
+$route['vehicle-insert-form'] = 'VehicleController/vehicleInsertForm';
+$route['vehicle-edit-form/(:num)'] = 'VehicleController/vehicleEditForm/$1';
 
-$route['nutrition']='NutritionController/nutritionIndex';
-$route['nutrition-insert-form']='NutritionController/nutritionInsertForm';
-$route['nutrition-edit-form/(:num)']='NutritionController/nutritionEditForm/$1';
+$route['nutrition'] = 'NutritionController/nutritionIndex';
+$route['nutrition-insert-form'] = 'NutritionController/nutritionInsertForm';
+$route['nutrition-edit-form/(:num)'] = 'NutritionController/nutritionEditForm/$1';
+
+$route['homeroom-time-attendance'] = 'ErrorController/error_404';
+$route['homeroom-brush-teeth'] = 'ErrorController/error_404';
+$route['homeroom-drinking-milk'] = 'ErrorController/error_404';
+$route['homeroom-student-information'] = 'ErrorController/error_404';
+$route['homeroom-weighing-heighing'] = 'ErrorController/error_404';
+$route['homeroom-sdq-record'] = 'ErrorController/error_404';
+$route['homeroom-visit-home'] = 'ErrorController/error_404';
+$route['homeroom-student-food'] = 'ErrorController/error_404';
+$route['homeroom-student-health'] = 'ErrorController/error_404';
+$route['homeroom-student-development'] = 'ErrorController/error_404';
+
+
