@@ -10,7 +10,7 @@
           <form id="login-form" method="post" autocomplete="off" enctype="multipart/form-data">
             <div class="mb-3">
               <label class="form-label">Username</label>
-              <input name="inUsername" type="text" class="form-control" placeholder="Your username" autocomplete="off">
+              <input name="inUsername" type="text" class="form-control" placeholder="Your username" autocomplete="on">
             </div>
             <div class="mb-2">
               <label class="form-label">Password</label>
