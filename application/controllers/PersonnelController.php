@@ -9,7 +9,7 @@ class PersonnelController extends CI_Controller
         if (empty($this->session->userdata("userStatus"))) {
             redirect(site_url(), 'refresh');
         }
-        $this->load->model("PersonnelModel"); 
+        $this->load->model("PersonnelModel");
     }
     public function personnelIndex()
     {
@@ -23,7 +23,7 @@ class PersonnelController extends CI_Controller
     {
         $data["type"] = $this->PersonnelModel->get_personnel_type($this->session->userdata("userSchoolId"));
         $this->load->view("layout/header");
-        $this->load->view("personnel/personnelInsertForm",$data);
+        $this->load->view("personnel/personnelInsertForm", $data);
         $this->load->view("layout/footer");
     }
     public function personnelEditForm($personnel_id)
@@ -33,28 +33,6 @@ class PersonnelController extends CI_Controller
         $this->load->view("layout/header");
         $this->load->view("personnel/personnelInsertForm", $data);
         $this->load->view("layout/footer");
-    }
-    public function insert_personnel()
-    {
-        $arr = array(
-            "school_id" => $this->session->userdata("userSchoolId"),
-            "personneltypeid" => $this->input->post("inType"),
-            "profile_image" => $this->input->post("inPersonnelLogo64"),
-            "titlename" => $this->input->post("inTitleName"),
-            "firstname" => $this->input->post("inFirstName"),
-            "lastname" => $this->input->post("inLastName"),
-            "nickname" => $this->input->post("inNickName"),
-            "idcard" => $this->input->post("inIdCard"),
-            "birthdate" => $this->input->post("inBirthDate"),
-            "gender" => $this->input->post("inGenDer"),
-            "bloodtype" => $this->input->post("inBloodType"),
-            "phonenumber" => $this->input->post("inPhoneNumber"),
-            "religion" => $this->input->post("inReligion"),
-            "ethnicity" => $this->input->post("inEthnicity"),
-            "nationality" => $this->input->post("inNationality")
-            
-        );
-        echo $this->PersonnelModel->insert_personnel($arr);
     }
     public function update_personnel()
     {
@@ -67,6 +45,7 @@ class PersonnelController extends CI_Controller
             "lastname" => $this->input->post("inLastName"),
             "nickname" => $this->input->post("inNickName"),
             "idcard" => $this->input->post("inIdCard"),
+            "email" => $this->input->post("inMail"),
             "birthdate" => $this->input->post("inBirthDate"),
             "gender" => $this->input->post("inGenDer"),
             "bloodtype" => $this->input->post("inBloodType"),
@@ -77,7 +56,6 @@ class PersonnelController extends CI_Controller
         );
         $this->PersonnelModel->update_personnel($arr, $this->input->post("inPer"));
     }
-
     public function delete_personnel()
     {
         $per_id = $this->input->post("inPer");

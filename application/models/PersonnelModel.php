@@ -42,7 +42,8 @@ class PersonnelModel extends CI_Model
     {
         if (!empty($user_id)) {
             $this->personel_pattern();
-            $this->db->join('tb_user_personnel u', 'u.personnel_id = a.id AND u.user_id = ' . $user_id, 'LEFT OUTER');
+            $this->db->join('tb_user_personnel u', 'u.personnel_id = a.id', 'LEFT OUTER');
+            $this->db->where(array('u.user_id' => $user_id));
             $query = $this->db->get();
             return $query->row_array();
         }
@@ -66,8 +67,8 @@ class PersonnelModel extends CI_Model
     {
         if (!empty($school_id)) {
             $this->personel_pattern();
-            $this->db->join('tb_room_teacher rt', 'rt.personnel_register_id = b.id','LEFT OUTER');
-            $this->db->join('tb_room r', 'r.id = rt.room_id','LEFT OUTER');
+            $this->db->join('tb_room_teacher rt', 'rt.personnel_register_id = b.id', 'LEFT OUTER');
+            $this->db->join('tb_room r', 'r.id = rt.room_id', 'LEFT OUTER');
             $this->db->where('rt.id', null);
             $this->db->where(array('d.id' => $school_id));
             $query = $this->db->get();
@@ -75,7 +76,7 @@ class PersonnelModel extends CI_Model
         }
     }
 
-    public function insert_personnel($data)
+    public function update_personnel($data, $personnel_id = null)
     {
         if (!empty($data["school_id"]) && !empty($data["personneltypeid"])) {
             $this->db->trans_begin();
@@ -86,6 +87,7 @@ class PersonnelModel extends CI_Model
                 "idcard" => $data["idcard"],
                 "profile_image" => $data["profile_image"],
                 "nickname" => $data["nickname"],
+                "email" => $data["email"],
                 "gender" => $data["gender"],
                 "birthdate" => strtotime($data["birthdate"]),
                 "bloodtype" => $data["bloodtype"],
@@ -93,62 +95,32 @@ class PersonnelModel extends CI_Model
                 "religion" => $data["religion"],
                 "ethnicity" => $data["ethnicity"],
                 "nationality" => $data["nationality"],
-                "created_at" => strtotime(date("Y-m-d h:i:s")),
                 "updated_at" => strtotime(date("Y-m-d h:i:s"))
             );
-            $this->db->insert('tb_personnel', $personnel);
-            $personnel_id = $this->db->insert_id();
 
-            $personnel_register = array(
-                "personnel_id" => $personnel_id,
-                "personnel_type_id" => $data["personneltypeid"],
-                "school_id" => $data["school_id"],
-                "status" => 1,
-                "date" => strtotime(date("Y-m-d")),
-                "comment" => "insert by personnel web"
-            );
-            $this->db->insert('tb_personnel_register', $personnel_register);
+            if (!empty($personnel_id)) {
+                $this->db->where('id', $personnel_id);
+                $this->db->update('tb_personnel', $personnel);
 
-            if ($this->db->trans_status() === FALSE) {
-                $this->db->trans_rollback();
-                return "rollback";
+                $personnel_register = array(
+                    "personnel_type_id" => $data["personneltypeid"]
+                );
+                $this->db->where('personnel_id', $personnel_id);
+                $this->db->update('tb_personnel_register', $personnel_register);
             } else {
-                $this->db->trans_commit();
-                return "success";
+                $this->db->insert('tb_personnel', $personnel);
+                $personnel_id = $this->db->insert_id();
+
+                $personnel_register = array(
+                    "personnel_id" => $personnel_id,
+                    "personnel_type_id" => $data["personneltypeid"],
+                    "school_id" => $data["school_id"],
+                    "status" => 1,
+                    "date" => strtotime(date("Y-m-d")),
+                    "comment" => "insert by personnel web"
+                );
+                $this->db->insert('tb_personnel_register', $personnel_register);
             }
-        } else {
-            return "missing parameter";
-        }
-    }
-
-    public function update_personnel($data, $personnel_id)
-    {
-        if (!empty($personnel_id)) {
-            $this->db->trans_begin();
-            $personnel = array(
-                "titlename" => $data["titlename"],
-                "firstname" => $data["firstname"],
-                "lastname" => $data["lastname"],
-                "idcard" => $data["idcard"],
-                "profile_image" => $data["profile_image"],
-                "nickname" => $data["nickname"],
-                "gender" => $data["gender"],
-                "birthdate" => strtotime($data["birthdate"]),
-                "bloodtype" => $data["bloodtype"],
-                "phonenumber" => $data["phonenumber"],
-                "religion" => $data["religion"],
-                "ethnicity" => $data["ethnicity"],
-                "nationality" => $data["nationality"],
-                "updated_at" => strtotime(date("Y-m-d h:i:s"))
-            );
-            $this->db->where('id', $personnel_id);
-            $this->db->update('tb_personnel', $personnel);
-
-            $personnel_register = array(
-                "personnel_type_id" => $data["personneltypeid"]
-            );
-            $this->db->where('personnel_id', $personnel_id);
-            $this->db->update('tb_personnel_register', $personnel_register);
 
             if ($this->db->trans_status() === FALSE) {
                 $this->db->trans_rollback();
