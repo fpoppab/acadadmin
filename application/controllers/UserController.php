@@ -29,7 +29,7 @@ class UserController extends CI_Controller
             "personnel_id" => $this->input->post("personnel_id"),
             "username" => $personnel['email'],
             "type" => 'user',
-            "password" => password_hash($this->input->post("idcard"), PASSWORD_DEFAULT)
+            "password" => password_hash($personnel['idcard'], PASSWORD_DEFAULT)
         );
         $this->UserModel->update_user($arr, $this->input->post("inUserId"));
     }
